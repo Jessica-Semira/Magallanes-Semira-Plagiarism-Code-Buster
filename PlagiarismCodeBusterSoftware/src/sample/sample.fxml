@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragOver="#DragOverApllication" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Label layoutX="188.0" layoutY="15.0" text="Plagiarism Code Buster">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="312.0" text="Folder Name:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="folderNameLabel" layoutX="162.0" layoutY="314.0" text="(Select Folder)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="348.0" text="File Path:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="filepathFolderLabel" layoutX="120.0" layoutY="350.0" text="(Select Folder)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="runTestBtn" layoutX="120.0" layoutY="412.0" mnemonicParsing="false" onAction="#runTestBtnAction" prefHeight="39.0" prefWidth="184.0" text="Run Test">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitBtn" layoutX="330.0" layoutY="412.0" mnemonicParsing="false" onAction="#exit" prefHeight="39.0" prefWidth="184.0" text="Exit">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Pane layoutX="45.0" layoutY="66.0" prefHeight="233.0" prefWidth="551.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="233.0" onDragDropped="#dragDropFunction" onDragOver="#dragOverFunction" stroke="BLACK" strokeType="INSIDE" width="551.0" />
+            <Label layoutX="133.0" layoutY="102.0" mouseTransparent="true" text="----------------------------or----------------------------" />
+            <Button layoutX="230.0" layoutY="133.0" mnemonicParsing="false" onAction="#getFileFolder" text="Select Folder" />
+            <Label fx:id="indicator" layoutX="98.0" layoutY="75.0" mouseTransparent="true" text="Drag and Drop the Folder Here to Input the Folder">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</Pane>
