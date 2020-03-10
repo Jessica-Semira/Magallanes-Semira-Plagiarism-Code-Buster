@@ -10,7 +10,7 @@ public class FingerPrint {
 
     private ArrayList<Integer> HashesKGram;
     private ArrayList<Integer> fingerPrint;
-    private final int windowSize = 8;
+    private final int windowSize = 12;
     private final int p =50;
 
     public FingerPrint(){
@@ -42,14 +42,12 @@ public class FingerPrint {
                 tempWindow[j] = HashesKGram.get(i+j);
             }
 
-            int tempHash = findMin(tempWindow);
-
             //it will get the index of the minimum hash based on the formed window
             location = i + findMinIndex(tempWindow);
 
-            if(location != minLocation && !fingerPrint.contains(tempHash)){
+            if(location != minLocation){
                 //it will check if the minmum hash is not selected
-                fingerPrint.add(tempHash);
+                fingerPrint.add(findMin(tempWindow));
                 minLocation = location;
             }
 

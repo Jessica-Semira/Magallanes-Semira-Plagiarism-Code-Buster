@@ -1,16 +1,19 @@
 package CodeBusterClasses;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import AdditionalJavaFXClasses.ProgressIndicator;
+import javafx.application.Platform;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class MassCompare {
+public class MassCompare extends Thread {
 
     private final int sizeTop = 10;
     //this class will executed the similarity algorithm of the project;
@@ -19,7 +22,11 @@ public class MassCompare {
     private File mainDirectory;
     private File[] manyFiles;//contains the different project files;
 
+    private ProgressBar progressBar;
+    private Label actionTaken;
+    private Stage stage;
 
+    private ProgressIndicator progressIndicator;
 
     public MassCompare(String filePathMainDirectory) {
 
@@ -27,8 +34,46 @@ public class MassCompare {
         manyFiles = mainDirectory.listFiles();
         matrixSimilarity = new PairScore[manyFiles.length][manyFiles.length];
         topSimilarity = new LinkedList<>();
-
         initializeArray();
+
+        progressIndicator = new ProgressIndicator("Comparing Files");
+    }
+
+    @Override
+    public synchronized void run(){
+
+        double percentage = 0.0;
+        int total = (manyFiles.length * manyFiles.length);
+
+        for (int i = 0; i < manyFiles.length; i++) {
+
+            for (int j = 0; j < manyFiles.length; j++) {
+
+                final int finalI = i + 1;
+                final int finalJ = j + 1;
+                final double finalpercentage = ((++ percentage) / total) ;
+
+
+                Platform.runLater(() -> {
+                    progressIndicator.setProgress(finalpercentage);
+                    progressIndicator.setActionIndicator("Comparing Files: " + manyFiles[finalI-1].getName() +" and " + manyFiles[finalJ-1].getName());
+                });
+
+                 if (matrixSimilarity[i][j].getScore() == -1) {
+                    float score = new CompareClass(manyFiles[i].getAbsolutePath(), manyFiles[j].getAbsolutePath()).getSimilarityScore();
+                    float score2 = new CompareClass(manyFiles[j].getAbsolutePath(), manyFiles[i].getAbsolutePath()).getSimilarityScore();
+
+                    float aveScore = (score + score2)/2;
+
+                    matrixSimilarity[i][j].setScore(aveScore);
+                    matrixSimilarity[j][i].setScore(aveScore);
+
+                    InTopScore(matrixSimilarity[i][j]);
+                }
+            }
+        }
+
+        Platform.runLater( () -> {progressIndicator.close();});
     }
 
     public PairScore[][] getSimilarityMatrix() {
@@ -53,30 +98,26 @@ public class MassCompare {
         return manyFiles.length;
     }
 
+    public void hideStatus(){
+        stage.hide();
+    }
+
     public void ExecuteComparison() {
 
-        try {
+        for (int i = 0; i < manyFiles.length; i++) {
 
+            for (int j = 0; j < manyFiles.length; j++) {
 
-            for (int i = 0; i < manyFiles.length; i++) {
+                if (matrixSimilarity[i][j].getScore() == -1) {
+                    float score = new CompareClass(manyFiles[i].getAbsolutePath(), manyFiles[j].getAbsolutePath()).getSimilarityScore();
 
-                for (int j = 0; j < manyFiles.length; j++) {
+                    matrixSimilarity[i][j].setScore(score);
+                    matrixSimilarity[j][i].setScore(score);
 
-                    if (matrixSimilarity[i][j].getScore() == -1) {
-                        float score = new CompareClass(manyFiles[i].getAbsolutePath(), manyFiles[j].getAbsolutePath()).getSimilarityScore();
-
-                        matrixSimilarity[i][j].setScore(score);
-                        matrixSimilarity[j][i].setScore(score);
-
-                        InTopScore(matrixSimilarity[i][j]);
-                    }
-
-
-
+                    InTopScore(matrixSimilarity[i][j]);
                 }
+
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }
@@ -118,6 +159,5 @@ public class MassCompare {
         }
 
     }
-
 
 }

@@ -7,7 +7,7 @@ public class KGram {
     //this function will produce k-grams which each substring having length 7
     private  ArrayList<String> kGrams;
     private ArrayList<Character> streamOfChar;
-    private final int kLength = 11;
+    private final int kLength = 7;
 
     public KGram(ArrayList<Character> input){
         streamOfChar = input;

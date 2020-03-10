@@ -1,5 +1,7 @@
 package CodeBusterClasses;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,8 +12,16 @@ public class GetCharacters {
     private String filepath;
     private ArrayList<Character> charactersFromFile;
 
-    public GetCharacters(String filepathProject) throws IOException {
-        file = new FileReader(filepathProject);
+    public GetCharacters(String filepathProject)  {
+        try{
+            file = new FileReader(new File(filepathProject));
+        }catch (FileNotFoundException ex){
+            ex.printStackTrace();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         this.filepath = filepathProject;
     }
 
@@ -32,6 +42,7 @@ public class GetCharacters {
 
             if(tempInt != 32 && tempInt != 13 && tempInt != 10) charactersFromFile.add((char)tempInt);
         }
+        file.close();
         reset();
         return charactersFromFile;
     }

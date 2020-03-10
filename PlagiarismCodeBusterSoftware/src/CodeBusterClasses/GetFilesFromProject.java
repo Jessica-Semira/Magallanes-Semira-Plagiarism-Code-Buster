@@ -15,6 +15,35 @@ public class GetFilesFromProject {
         acceptedFiles = new ArrayList<>();
     }
 
+    /*
+    public boolean isProject(){
+        if(directory.isDirectory()){
+            return findAProjectFile(directory);
+        }
+        else{
+            return isFileExtensionAccept(directory.getName());
+        }
+
+    }*/
+
+    private boolean findAProjectFile(File folder) {
+        //this is will add file in the prelimFiles
+
+        for ( File fileEntry : folder.listFiles()) {
+
+            if (fileEntry.isDirectory()) {
+                return findAProjectFile(fileEntry);
+            } else {
+                System.out.println(fileEntry.getName());
+                return isFileExtensionAccept(fileEntry.getName());
+            }
+
+        }
+
+        return false;
+    }
+
+
     private void listFilesForFolder(File folder) {
         //this is will add file in the prelimFiles
 
@@ -31,18 +60,15 @@ public class GetFilesFromProject {
 
         if(directory.isDirectory()){
             listFilesForFolder(directory);
+            for (File f: prelimFiles) {
+
+                if(isFileExtensionAccept(f.getName())){
+                    acceptedFiles.add(f);
+                }
+            }
         }
         else{
-            prelimFiles.add(directory);
-        }
-
-
-
-        for (File f: prelimFiles) {
-
-            if(isFileExtensionAccept(f.getName())){
-                acceptedFiles.add(f);
-            }
+            if(isFileExtensionAccept(directory.getName())) acceptedFiles.add(directory);
         }
 
         return acceptedFiles;

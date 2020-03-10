@@ -46,7 +46,7 @@ public class HalsteadMetrics {
     public Integer getTotalNumOperators(){
         int sum = 0;
         for(int i = 0 ; i<numOperators.length; i++){
-            if(numOperators[i] !=0) sum+= numOperators[i];
+            if(numOperators[i] != 0) sum += numOperators[i];
         }
         return sum;
     }
@@ -67,6 +67,7 @@ public class HalsteadMetrics {
 
     private void countOperators(){
 
+        uniqueOperands.add("s");
         for(String s : stringFromProject){
 
             for (int i = 0 ; i < operators.length; i++) {
