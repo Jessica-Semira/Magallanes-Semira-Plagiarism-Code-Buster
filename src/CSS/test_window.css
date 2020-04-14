@@ -1,0 +1,64 @@
+.root {
+   
+    -fx-font-family : "Times New Roman", Arial, sans-serif;
+	-fx-font-size: 13;
+}
+
+AnchorPane{
+	 -fx-background-color: #BEC1CB;
+}
+#HalsteadMatrix{
+	-fx-background-color:  #BEDBE7;
+}
+
+#top10{
+	-fx-background-color:  #BEDBE7;
+}
+#ListProjectsTest{
+	-fx-background-color:  #BEDBE7;
+}
+
+
+.scroll-pane{
+	-fx-background-color: #BEC1CB;
+}
+
+.table-view .column-header {
+	-fx-background-color: #BEC1CB;
+}
+
+.table-view .column-header .label{
+	-fx-font-family : "Times New Roman", Arial, sans-serif;
+	-fx-font-size: 15;
+	-fx-background-color: #BEC1CB;
+}
+
+.label{
+	-fx-font-family : "Times New Roman", Arial, sans-serif;
+	-fx-font-size: 25;
+}
+
+.button{
+	-fx-effect: dropshadow( one-pass-box , grey , 8 , 0.0 , 2 , 0 );
+	-fx-background-color: #BEDBE7;
+}
+.button:hover {
+    -fx-background-color: linear-gradient(#BEDBE7, #558396);
+}
+
+.tab-pane .tab-header-background{
+	-fx-background-color: #BEC1CB;
+}
+
+.tab-pane .tab{
+    -fx-background-color: #40A5A7;
+
+}
+
+.tab-pane .tab:selected{
+    -fx-background-color: #BEDBE7;
+}
+
+
+
+

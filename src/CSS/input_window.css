@@ -1,0 +1,19 @@
+.root {
+    -fx-background-color: #BEC1CB;
+}
+
+.button{
+	-fx-background-color: #BEDBE7;
+	 -fx-effect: dropshadow( one-pass-box , grey , 8 , 0.0 , 2 , 0 );
+}
+
+
+.button:hover {
+    -fx-background-color: linear-gradient(#BEDBE7, #558396);
+}
+
+.label{
+	-fx-font-family : "Times New Roman", Arial, sans-serif;
+}
+
+
